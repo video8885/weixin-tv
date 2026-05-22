@@ -334,15 +334,86 @@
     letter-spacing: 0.1em;
   }
 
+  /* 漢堡選單 */
+  .nav-menu-btn {
+    display: none;
+    background: none; border: none;
+    cursor: pointer; padding: 8px;
+    flex-direction: column; gap: 5px;
+  }
+  .nav-menu-btn span {
+    display: block; width: 24px; height: 1px;
+    background: var(--gold);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-menu-btn.open span:nth-child(2) { opacity: 0; }
+  .nav-menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 64px; left: 0; right: 0;
+    background: rgba(15,12,7,0.98);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    z-index: 99; padding: 1.5rem 5%;
+    flex-direction: column; gap: 0;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 1rem; letter-spacing: 0.15em;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    transition: color 0.3s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:active { color: var(--gold); }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    .hero-stats { gap: 2rem; }
-    .founder-block { grid-template-columns: 1fr; gap: 40px; }
-    .founder-img { display: none; }
-    section { padding: 60px 5%; }
-    .plans-grid { padding: 0 5% 60px; }
-    .contact-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
+    .nav-menu-btn { display: flex; }
+
+    .hero { padding: 100px 6% 60px; min-height: auto; padding-top: 120px; }
+    .hero::before { font-size: 80vw; }
+    .hero-badge { font-size: 0.65rem; letter-spacing: 0.15em; }
+    .hero h2 { letter-spacing: 0.25em; margin-bottom: 2rem; }
+    .hero-stats { gap: 1.5rem; }
+    .stat-num { font-size: 1.5rem; }
+    .stat-label { font-size: 0.7rem; letter-spacing: 0.1em; }
+    .divider { height: 36px; }
+    .hero-desc { font-size: 0.9rem; }
+
+    section { padding: 60px 6%; }
+    .section-title { margin-bottom: 40px; }
+
+    .founder-block { grid-template-columns: 1fr; gap: 30px; }
+    .founder-img { display: none; }
+    .founder-name { font-size: 1.8rem; }
+    .founder-title { font-size: 0.8rem; letter-spacing: 0.1em; }
+    .founder-text { font-size: 0.9rem; line-height: 2; }
+
+    #programs { padding: 60px 6% !important; }
+    .programs-grid { grid-template-columns: 1fr; gap: 2px; }
+    .program-card { padding: 1.8rem 1.5rem; }
+
+    .support-hero { padding: 100px 6% 60px; min-height: auto; }
+    .support-hero h1 { letter-spacing: 0.15em; }
+
+    .plans-grid { grid-template-columns: 1fr; padding: 2rem 6% 60px; gap: 1.5rem; }
+    .plan-card { padding: 2rem 1.5rem; }
+
+    .contact-section { padding: 40px 6% 80px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+    .contact-item { padding: 1.5rem; }
+
+    footer { padding: 2rem 6%; }
+  }
+
+  @media (max-width: 400px) {
+    .hero-stats { gap: 1rem; }
+    .stat-num { font-size: 1.2rem; }
+    .hero-badge { display: none; }
   }
 </style>
 </head>
@@ -355,7 +426,15 @@
     <li><a href="#" onclick="showPage('home'); setTimeout(()=>scrollTo('programs'),100)">節目類型</a></li>
     <li><a href="#" onclick="showPage('support')">護持廣告</a></li>
   </ul>
+  <button class="nav-menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('home');closeMenu()">頻道介紹</a>
+  <a href="#" onclick="showPage('home');setTimeout(()=>scrollTo('programs'),100);closeMenu()">節目類型</a>
+  <a href="#" onclick="showPage('support');closeMenu()">護持廣告</a>
+</div>
 
 <!-- HOME PAGE -->
 <div id="page-home" class="page active">
@@ -575,6 +654,16 @@
   }
   function scrollTo(id) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }
+  function toggleMenu() {
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('menuBtn').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
   }
 </script>
 
