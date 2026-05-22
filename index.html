@@ -5,442 +5,472 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>唯心電視台 — 易經風水專業頻道</title>
 <style>
-  :root {
-    --gold: #c9a84c;
-    --gold-light: #e8d5a0;
-    --dark: #0f0c07;
-    --dark2: #1a1508;
-    --dark3: #221e10;
-    --text: #f0e8d0;
-    --text-muted: #a09070;
-  }
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8d5a0;
+  --dark: #0f0c07;
+  --dark2: #1a1508;
+  --dark3: #221e10;
+  --text: #f0e8d0;
+  --text-muted: #a09070;
+  --border: rgba(201,168,76,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Noto Serif TC','Songti SC',Georgia,serif;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; width:100%; z-index:200;
+  background: rgba(15,12,7,0.97);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 64px;
+}
+.nav-logo { font-size:1.15rem; letter-spacing:.15em; color:var(--gold); font-weight:700; cursor:pointer; }
+.nav-links { display:flex; gap:0; list-style:none; }
+.nav-links li a {
+  display:block; padding: 0 1.1rem;
+  color:var(--text-muted); text-decoration:none;
+  font-size:.85rem; letter-spacing:.1em; line-height:64px;
+  transition:color .3s, border-bottom .3s;
+  border-bottom: 2px solid transparent;
+}
+.nav-links li a:hover { color:var(--gold); }
+.nav-links li a.active { color:var(--gold); border-bottom-color:var(--gold); }
+.nav-menu-btn {
+  display:none; background:none; border:none; cursor:pointer;
+  padding:8px; flex-direction:column; gap:5px;
+}
+.nav-menu-btn span { display:block; width:24px; height:1px; background:var(--gold); transition:.3s; }
+.nav-menu-btn.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.nav-menu-btn.open span:nth-child(2){ opacity:0; }
+.nav-menu-btn.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+.mobile-menu {
+  display:none; position:fixed; top:64px; left:0; right:0;
+  background:rgba(15,12,7,0.98); border-bottom:1px solid var(--border);
+  z-index:199; flex-direction:column;
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a {
+  color:var(--text-muted); text-decoration:none;
+  font-size:1rem; letter-spacing:.12em;
+  padding:1rem 6%; border-bottom:1px solid rgba(201,168,76,0.08);
+}
+.mobile-menu a:active,.mobile-menu a.active { color:var(--gold); }
 
-  body {
-    background: var(--dark);
-    color: var(--text);
-    font-family: 'Noto Serif TC', 'Songti SC', Georgia, serif;
-    line-height: 1.8;
-  }
+/* ── PAGES ── */
+.page { display:none; }
+.page.active { display:block; }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    background: rgba(15,12,7,0.95);
-    border-bottom: 1px solid rgba(201,168,76,0.3);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%;
-    height: 64px;
-  }
-  .nav-logo {
-    font-size: 1.2rem; letter-spacing: 0.15em; color: var(--gold);
-    font-weight: 700;
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: var(--text-muted); text-decoration: none;
-    font-size: 0.9rem; letter-spacing: 0.1em;
-    transition: color 0.3s;
-  }
-  .nav-links a:hover { color: var(--gold); }
+/* ── COMMON ── */
+.pt { padding-top:64px; }
+.section { padding:80px 10%; max-width:1200px; margin:0 auto; }
+.section-full { padding:80px 10%; }
+.section-title { text-align:center; margin-bottom:50px; }
+.section-title .en { font-size:.72rem; letter-spacing:.4em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:.6rem; }
+.section-title h2 { font-size:clamp(1.4rem,3vw,2.2rem); letter-spacing:.2em; }
+.gold-line { width:50px; height:1px; background:var(--gold); margin:1.2rem auto 0; }
+.btn-gold {
+  display:inline-block; padding:.75rem 2.5rem;
+  border:1px solid var(--gold); color:var(--gold);
+  font-size:.85rem; letter-spacing:.25em;
+  text-decoration:none; cursor:pointer;
+  background:none; font-family:inherit;
+  transition:background .3s,color .3s;
+}
+.btn-gold:hover { background:var(--gold); color:var(--dark); }
+.btn-solid {
+  display:inline-block; padding:.75rem 2.5rem;
+  background:var(--gold); color:var(--dark);
+  font-size:.85rem; letter-spacing:.25em;
+  text-decoration:none; cursor:pointer;
+  border:1px solid var(--gold); font-family:inherit;
+  transition:background .3s;
+}
+.btn-solid:hover { background:var(--gold-light); }
+.badge {
+  border:1px solid var(--gold); color:var(--gold);
+  font-size:.72rem; letter-spacing:.25em;
+  padding:.25rem 1rem; display:inline-block; margin-bottom:1.5rem;
+}
 
-  /* PAGES */
-  .page { display: none; }
-  .page.active { display: block; }
+/* ── HOME: HERO ── */
+.hero {
+  min-height:100vh; position:relative; overflow:hidden;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:100px 6% 80px;
+  background: radial-gradient(ellipse at center,rgba(201,168,76,.07) 0%,transparent 65%),
+              linear-gradient(180deg,#0f0c07 0%,#1a1200 50%,#0f0c07 100%);
+}
+.hero-bg {
+  position:absolute; font-size:42vw; color:rgba(201,168,76,.025);
+  line-height:1; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  animation:spin 120s linear infinite; pointer-events:none;
+}
+@keyframes spin { to{ transform:translate(-50%,-50%) rotate(360deg); } }
+.hero h1 {
+  font-size:clamp(2.8rem,7vw,5.5rem); letter-spacing:.2em;
+  color:var(--gold); text-shadow:0 0 50px rgba(201,168,76,.35);
+  margin-bottom:.4rem; position:relative;
+}
+.hero h2 {
+  font-size:clamp(1rem,2.5vw,1.5rem); letter-spacing:.4em;
+  color:var(--text-muted); font-weight:300; margin-bottom:3rem; position:relative;
+}
+.hero-stats {
+  display:flex; gap:3.5rem; position:relative; margin-bottom:3rem;
+}
+.stat-item { text-align:center; }
+.stat-num { font-size:1.9rem; color:var(--gold); font-weight:700; letter-spacing:.05em; }
+.stat-label { font-size:.75rem; color:var(--text-muted); letter-spacing:.18em; }
+.stat-div { width:1px; height:44px; background:var(--border); align-self:center; }
+.hero-desc { max-width:560px; color:var(--text-muted); font-size:.95rem; letter-spacing:.05em; position:relative; margin-bottom:2.5rem; line-height:2; }
+.hero-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; position:relative; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background:
-      radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%),
-      linear-gradient(180deg, #0f0c07 0%, #1a1200 50%, #0f0c07 100%);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 80px 5% 60px;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: '☯';
-    position: absolute;
-    font-size: 40vw;
-    color: rgba(201,168,76,0.03);
-    line-height: 1;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotate 120s linear infinite;
-  }
-  @keyframes rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+/* ── HOME: PLATFORM ── */
+.platform-section { padding:70px 10%; background:var(--dark2); }
+.platform-inner { max-width:1000px; margin:0 auto; text-align:center; }
+.platform-grid {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:1.5rem; margin-top:3rem;
+}
+.platform-card {
+  background:var(--dark3); border:1px solid var(--border);
+  padding:2rem 1rem; text-align:center;
+  transition:border-color .3s; cursor:pointer; text-decoration:none; display:block;
+}
+.platform-card:hover { border-color:var(--gold); }
+.platform-icon { font-size:2rem; margin-bottom:.8rem; color:var(--gold); }
+.platform-name { font-size:.85rem; letter-spacing:.15em; color:var(--text); }
+.platform-sub { font-size:.75rem; color:var(--text-muted); margin-top:.3rem; }
 
-  .hero-badge {
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-size: 0.75rem; letter-spacing: 0.3em;
-    padding: 0.3rem 1.2rem;
-    margin-bottom: 2rem;
-    position: relative;
-  }
-  .hero h1 {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    text-shadow: 0 0 40px rgba(201,168,76,0.4);
-    margin-bottom: 0.5rem;
-    position: relative;
-  }
-  .hero h2 {
-    font-size: clamp(1rem, 2.5vw, 1.6rem);
-    letter-spacing: 0.4em;
-    color: var(--text-muted);
-    margin-bottom: 3rem;
-    font-weight: 300;
-    position: relative;
-  }
-  .hero-stats {
-    display: flex; gap: 4rem;
-    position: relative; margin-bottom: 3rem;
-  }
-  .stat-item { text-align: center; }
-  .stat-num {
-    font-size: 2rem; color: var(--gold);
-    font-weight: 700; letter-spacing: 0.05em;
-  }
-  .stat-label {
-    font-size: 0.8rem; color: var(--text-muted);
-    letter-spacing: 0.2em;
-  }
-  .divider {
-    width: 1px; height: 50px;
-    background: rgba(201,168,76,0.3);
-    align-self: center;
-  }
-  .hero-desc {
-    max-width: 600px;
-    color: var(--text-muted);
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    position: relative;
-  }
+/* ── HOME: FEATURED PROGRAMS ── */
+.prog-preview { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+.prog-card {
+  background:var(--dark2); border:1px solid var(--border);
+  padding:2rem 1.5rem; transition:border-color .3s,background .3s;
+}
+.prog-card:hover { border-color:var(--gold); background:var(--dark3); }
+.prog-icon { font-size:1.6rem; color:var(--gold); margin-bottom:1rem; }
+.prog-tag { font-size:.7rem; letter-spacing:.25em; color:var(--gold); margin-bottom:.5rem; }
+.prog-name { font-size:1rem; letter-spacing:.12em; color:var(--text); margin-bottom:.6rem; }
+.prog-desc { font-size:.82rem; color:var(--text-muted); line-height:1.9; }
 
-  /* SECTION */
-  section {
-    padding: 100px 10%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .section-title {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-  .section-title .en {
-    font-size: 0.75rem;
-    letter-spacing: 0.4em;
-    color: var(--gold);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 0.8rem;
-  }
-  .section-title h3 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    letter-spacing: 0.2em;
-    color: var(--text);
-  }
-  .gold-line {
-    width: 60px; height: 1px;
-    background: var(--gold);
-    margin: 1.5rem auto 0;
-  }
+/* ── HOME: SOCIAL ── */
+.social-section { padding:60px 10%; text-align:center; }
+.social-grid { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
+.social-btn {
+  display:flex; align-items:center; gap:.6rem;
+  padding:.7rem 1.5rem; border:1px solid var(--border);
+  color:var(--text-muted); text-decoration:none; font-size:.85rem;
+  letter-spacing:.1em; transition:border-color .3s, color .3s;
+}
+.social-btn:hover { border-color:var(--gold); color:var(--gold); }
+.social-btn .icon { font-size:1.1rem; }
 
-  /* FOUNDER */
-  .founder-block {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center;
-  }
-  .founder-img {
-    aspect-ratio: 3/4;
-    background: var(--dark3);
-    border: 1px solid rgba(201,168,76,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 6rem; color: rgba(201,168,76,0.15);
-    position: relative;
-  }
-  .founder-img::after {
-    content: '';
-    position: absolute; inset: 8px;
-    border: 1px solid rgba(201,168,76,0.1);
-  }
-  .founder-tag {
-    font-size: 0.75rem; letter-spacing: 0.3em;
-    color: var(--gold); margin-bottom: 1rem;
-  }
-  .founder-name {
-    font-size: 2.5rem; letter-spacing: 0.3em;
-    color: var(--text); margin-bottom: 0.5rem;
-  }
-  .founder-title {
-    font-size: 0.9rem; letter-spacing: 0.2em;
-    color: var(--text-muted); margin-bottom: 2rem;
-  }
-  .founder-text {
-    color: var(--text-muted); font-size: 0.95rem;
-    line-height: 2.2; letter-spacing: 0.05em;
-  }
+/* ── ABOUT ── */
+.about-hero {
+  min-height:45vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  padding:130px 6% 80px;
+  background:radial-gradient(ellipse at center,rgba(201,168,76,.06),transparent 65%),
+             linear-gradient(180deg,#0f0c07,#1a1200 50%,#0f0c07);
+}
+.about-hero h1 { font-size:clamp(2rem,5vw,3.5rem); letter-spacing:.2em; color:var(--gold); margin-bottom:.5rem; }
+.about-hero p { color:var(--text-muted); font-size:.95rem; max-width:520px; letter-spacing:.05em; line-height:2; margin-top:1rem; }
+.founder-grid { display:grid; grid-template-columns:1fr 2fr; gap:60px; align-items:start; }
+.founder-photo {
+  aspect-ratio:3/4; background:var(--dark3); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:5rem; color:rgba(201,168,76,.12); position:relative;
+}
+.founder-photo::after { content:''; position:absolute; inset:8px; border:1px solid rgba(201,168,76,.08); }
+.founder-tag { font-size:.7rem; letter-spacing:.3em; color:var(--gold); margin-bottom:.8rem; }
+.founder-name { font-size:2.2rem; letter-spacing:.3em; color:var(--text); margin-bottom:.4rem; }
+.founder-title { font-size:.85rem; letter-spacing:.15em; color:var(--text-muted); margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+.founder-body { color:var(--text-muted); font-size:.92rem; line-height:2.2; letter-spacing:.04em; }
+.founder-body p { margin-bottom:1.2rem; }
+.about-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:4px; }
+.about-card { background:var(--dark2); border:1px solid var(--border); padding:2.5rem 2rem; }
+.about-card-icon { font-size:1.8rem; color:var(--gold); margin-bottom:1rem; }
+.about-card-title { font-size:1rem; letter-spacing:.15em; color:var(--text); margin-bottom:.8rem; }
+.about-card-text { font-size:.83rem; color:var(--text-muted); line-height:2; }
+.about-links { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.about-link-card {
+  display:block; background:var(--dark2); border:1px solid var(--border);
+  padding:2rem; text-decoration:none;
+  transition:border-color .3s;
+}
+.about-link-card:hover { border-color:var(--gold); }
+.about-link-label { font-size:.7rem; letter-spacing:.3em; color:var(--gold); margin-bottom:.5rem; }
+.about-link-name { font-size:1.1rem; letter-spacing:.15em; color:var(--text); margin-bottom:.5rem; }
+.about-link-desc { font-size:.8rem; color:var(--text-muted); }
 
-  /* PROGRAMS */
-  .programs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2px;
-  }
-  .program-card {
-    background: var(--dark2);
-    padding: 2.5rem 2rem;
-    border: 1px solid rgba(201,168,76,0.1);
-    transition: border-color 0.3s, background 0.3s;
-    cursor: default;
-  }
-  .program-card:hover {
-    border-color: rgba(201,168,76,0.4);
-    background: var(--dark3);
-  }
-  .program-icon {
-    font-size: 2rem; margin-bottom: 1.2rem;
-    color: var(--gold);
-  }
-  .program-name {
-    font-size: 1.1rem; letter-spacing: 0.15em;
-    color: var(--text); margin-bottom: 0.8rem;
-  }
-  .program-desc {
-    font-size: 0.85rem; color: var(--text-muted);
-    line-height: 1.9; letter-spacing: 0.05em;
-  }
+/* ── PROGRAMS ── */
+.programs-hero {
+  padding:130px 6% 70px; text-align:center;
+  background:radial-gradient(ellipse at center,rgba(201,168,76,.06),transparent 65%),
+             linear-gradient(180deg,#0f0c07,#1a1200 50%,#0f0c07);
+}
+.programs-hero h1 { font-size:clamp(2rem,5vw,3.5rem); letter-spacing:.2em; color:var(--gold); }
+.programs-hero p { color:var(--text-muted); font-size:.92rem; margin-top:1rem; max-width:500px; margin-left:auto; margin-right:auto; }
+.cat-tabs {
+  display:flex; gap:0; overflow-x:auto; margin-bottom:0;
+  border-bottom:1px solid var(--border);
+  scrollbar-width:none; padding:0 10%;
+  background:var(--dark2);
+}
+.cat-tabs::-webkit-scrollbar { display:none; }
+.cat-tab {
+  flex-shrink:0; padding:.9rem 1.3rem;
+  font-size:.8rem; letter-spacing:.12em; color:var(--text-muted);
+  cursor:pointer; border-bottom:2px solid transparent;
+  background:none; border-top:none; border-left:none; border-right:none;
+  font-family:inherit; transition:color .3s;
+  white-space:nowrap;
+}
+.cat-tab:hover { color:var(--text); }
+.cat-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.cat-content { display:none; }
+.cat-content.active { display:block; }
+.prog-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:2px; padding:2px;
+}
+.prog-item {
+  background:var(--dark2); border:1px solid var(--border);
+  padding:1.5rem; transition:border-color .3s, background .3s;
+  cursor:default;
+}
+.prog-item:hover { border-color:rgba(201,168,76,.45); background:var(--dark3); }
+.prog-item-icon { font-size:1.3rem; color:var(--gold); margin-bottom:.8rem; }
+.prog-item-name { font-size:.9rem; letter-spacing:.1em; color:var(--text); line-height:1.6; }
+.prog-item-ep { font-size:.72rem; color:var(--text-muted); margin-top:.4rem; letter-spacing:.08em; }
 
-  /* SUPPORT PAGE */
-  .support-hero {
-    min-height: 50vh;
-    background: linear-gradient(180deg, #0f0c07, #1a1200 50%, #0f0c07);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 120px 5% 80px;
-  }
-  .support-hero h1 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    letter-spacing: 0.25em; color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .support-hero p {
-    color: var(--text-muted); font-size: 1rem;
-    letter-spacing: 0.1em; max-width: 560px;
-    line-height: 2;
-  }
+/* ── NEWS ── */
+.news-hero {
+  padding:130px 6% 70px; text-align:center;
+  background:radial-gradient(ellipse at center,rgba(201,168,76,.06),transparent 65%),
+             linear-gradient(180deg,#0f0c07,#1a1200 50%,#0f0c07);
+}
+.news-hero h1 { font-size:clamp(2rem,5vw,3.5rem); letter-spacing:.2em; color:var(--gold); }
+.news-tabs {
+  display:flex; gap:0; border-bottom:1px solid var(--border);
+  padding:0 10%; background:var(--dark2); overflow-x:auto;
+  scrollbar-width:none;
+}
+.news-tabs::-webkit-scrollbar { display:none; }
+.news-tab {
+  flex-shrink:0; padding:.9rem 1.3rem;
+  font-size:.8rem; letter-spacing:.12em; color:var(--text-muted);
+  cursor:pointer; border-bottom:2px solid transparent;
+  background:none; border-top:none; border-left:none; border-right:none;
+  font-family:inherit; transition:color .3s; white-space:nowrap;
+}
+.news-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.news-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2px; padding:2px; }
+.news-card { background:var(--dark2); border:1px solid var(--border); padding:2rem; }
+.news-date { font-size:.72rem; letter-spacing:.2em; color:var(--gold); margin-bottom:.6rem; }
+.news-title { font-size:.95rem; letter-spacing:.08em; color:var(--text); margin-bottom:.8rem; line-height:1.7; }
+.news-excerpt { font-size:.82rem; color:var(--text-muted); line-height:1.9; }
+.info-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:2px; padding:2px; }
+.info-card {
+  background:var(--dark2); border:1px solid var(--border);
+  padding:2rem; text-align:center;
+  text-decoration:none; transition:border-color .3s; display:block;
+}
+.info-card:hover { border-color:var(--gold); }
+.info-card-icon { font-size:2rem; color:var(--gold); margin-bottom:1rem; }
+.info-card-name { font-size:.95rem; letter-spacing:.15em; color:var(--text); margin-bottom:.5rem; }
+.info-card-desc { font-size:.8rem; color:var(--text-muted); }
 
-  .plans-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 0 10% 80px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .plan-card {
-    background: var(--dark2);
-    border: 1px solid rgba(201,168,76,0.15);
-    padding: 2.5rem;
-    position: relative;
-    transition: border-color 0.3s;
-  }
-  .plan-card.featured {
-    border-color: var(--gold);
-  }
-  .plan-card.featured::before {
-    content: '推薦';
-    position: absolute; top: -1px; right: 2rem;
-    background: var(--gold); color: var(--dark);
-    font-size: 0.7rem; letter-spacing: 0.2em;
-    padding: 0.2rem 0.8rem;
-  }
-  .plan-name {
-    font-size: 0.8rem; letter-spacing: 0.3em;
-    color: var(--gold); margin-bottom: 0.5rem;
-  }
-  .plan-title {
-    font-size: 1.5rem; letter-spacing: 0.15em;
-    color: var(--text); margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(201,168,76,0.15);
-  }
-  .plan-features {
-    list-style: none; margin-bottom: 2rem;
-  }
-  .plan-features li {
-    font-size: 0.88rem; color: var(--text-muted);
-    padding: 0.6rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    letter-spacing: 0.05em;
-  }
-  .plan-features li::before {
-    content: '— ';
-    color: var(--gold);
-  }
-  .plan-cta {
-    display: block; text-align: center;
-    padding: 0.8rem;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-size: 0.85rem; letter-spacing: 0.25em;
-    text-decoration: none;
-    transition: background 0.3s, color 0.3s;
-    cursor: pointer; background: none;
-    width: 100%; font-family: inherit;
-  }
-  .plan-cta:hover, .plan-card.featured .plan-cta {
-    background: var(--gold); color: var(--dark);
-  }
-  .plan-card.featured .plan-cta:hover {
-    background: var(--gold-light);
-  }
+/* ── WATCH ── */
+.watch-hero {
+  padding:130px 6% 70px; text-align:center;
+  background:radial-gradient(ellipse at center,rgba(201,168,76,.06),transparent 65%),
+             linear-gradient(180deg,#0f0c07,#1a1200 50%,#0f0c07);
+}
+.watch-hero h1 { font-size:clamp(2rem,5vw,3.5rem); letter-spacing:.2em; color:var(--gold); }
+.watch-hero p { color:var(--text-muted); font-size:.92rem; margin-top:1rem; max-width:480px; margin-left:auto; margin-right:auto; }
+.watch-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:2rem; }
+.watch-card {
+  background:var(--dark2); border:1px solid var(--border);
+  padding:2.5rem 2rem; text-align:center;
+  text-decoration:none; display:block;
+  transition:border-color .3s, background .3s;
+}
+.watch-card:hover { border-color:var(--gold); background:var(--dark3); }
+.watch-card-icon { font-size:2.5rem; margin-bottom:1.2rem; }
+.watch-card-name { font-size:1.1rem; letter-spacing:.15em; color:var(--text); margin-bottom:.5rem; }
+.watch-card-desc { font-size:.82rem; color:var(--text-muted); line-height:1.9; }
+.channel-table { width:100%; border-collapse:collapse; }
+.channel-table th {
+  background:var(--dark3); color:var(--gold);
+  font-size:.78rem; letter-spacing:.2em;
+  padding:1rem 1.2rem; text-align:left;
+  border-bottom:1px solid var(--border); font-weight:400;
+}
+.channel-table td {
+  padding:1rem 1.2rem; font-size:.85rem; color:var(--text-muted);
+  border-bottom:1px solid rgba(201,168,76,.06);
+  letter-spacing:.05em;
+}
+.channel-table tr:hover td { background:var(--dark3); }
 
-  /* CONTACT */
-  .contact-section {
-    padding: 60px 10% 100px;
-    max-width: 800px; margin: 0 auto;
-    text-align: center;
-  }
-  .contact-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 2rem; margin-top: 3rem;
-  }
-  .contact-item {
-    background: var(--dark2);
-    border: 1px solid rgba(201,168,76,0.1);
-    padding: 2rem;
-  }
-  .contact-item .label {
-    font-size: 0.75rem; letter-spacing: 0.3em;
-    color: var(--gold); margin-bottom: 0.5rem;
-  }
-  .contact-item .value {
-    font-size: 0.95rem; color: var(--text-muted);
-    letter-spacing: 0.05em;
-  }
+/* ── SUPPORT ── */
+.support-hero {
+  min-height:45vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  padding:130px 6% 80px;
+  background:radial-gradient(ellipse at center,rgba(201,168,76,.06),transparent 65%),
+             linear-gradient(180deg,#0f0c07,#1a1200 50%,#0f0c07);
+}
+.support-hero h1 { font-size:clamp(2rem,5vw,3.5rem); letter-spacing:.2em; color:var(--gold); margin-bottom:.5rem; }
+.support-hero p { color:var(--text-muted); font-size:.95rem; max-width:540px; line-height:2; margin-top:1rem; }
+.plans-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+.plan-card { background:var(--dark2); border:1px solid var(--border); padding:2.5rem; position:relative; }
+.plan-card.featured { border-color:var(--gold); }
+.plan-card.featured::before {
+  content:'推薦'; position:absolute; top:-1px; right:2rem;
+  background:var(--gold); color:var(--dark);
+  font-size:.68rem; letter-spacing:.2em; padding:.2rem .8rem;
+}
+.plan-tier { font-size:.72rem; letter-spacing:.3em; color:var(--gold); margin-bottom:.4rem; }
+.plan-name { font-size:1.4rem; letter-spacing:.15em; color:var(--text); margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+.plan-features { list-style:none; margin-bottom:2rem; }
+.plan-features li { font-size:.85rem; color:var(--text-muted); padding:.55rem 0; border-bottom:1px solid rgba(255,255,255,.04); letter-spacing:.04em; }
+.plan-features li::before { content:'— '; color:var(--gold); }
+.plan-cta {
+  display:block; text-align:center; padding:.85rem;
+  border:1px solid var(--gold); color:var(--gold);
+  font-size:.82rem; letter-spacing:.22em; cursor:pointer;
+  background:none; width:100%; font-family:inherit;
+  transition:background .3s,color .3s;
+}
+.plan-cta:hover,.plan-card.featured .plan-cta { background:var(--gold); color:var(--dark); }
+.merit-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+.merit-card { background:var(--dark2); border:1px solid var(--border); padding:2.5rem; text-align:center; }
+.merit-icon { font-size:2rem; color:var(--gold); margin-bottom:1rem; }
+.merit-name { font-size:1.1rem; letter-spacing:.15em; color:var(--text); margin-bottom:.8rem; }
+.merit-desc { font-size:.83rem; color:var(--text-muted); line-height:2; }
+.contact-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+.contact-item { background:var(--dark2); border:1px solid var(--border); padding:2rem; }
+.contact-label { font-size:.7rem; letter-spacing:.3em; color:var(--gold); margin-bottom:.5rem; }
+.contact-value { font-size:.92rem; color:var(--text-muted); letter-spacing:.05em; }
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid rgba(201,168,76,0.15);
-    padding: 2rem 5%;
-    text-align: center;
-    font-size: 0.8rem; color: var(--text-muted);
-    letter-spacing: 0.1em;
-  }
+/* ── FOOTER ── */
+footer {
+  background:var(--dark2); border-top:1px solid var(--border);
+  padding:3rem 10%;
+}
+.footer-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr; gap:4rem; }
+.footer-brand .logo { font-size:1.1rem; letter-spacing:.18em; color:var(--gold); margin-bottom:1rem; }
+.footer-brand p { font-size:.82rem; color:var(--text-muted); line-height:2; }
+.footer-col h4 { font-size:.75rem; letter-spacing:.3em; color:var(--gold); margin-bottom:1.2rem; }
+.footer-col ul { list-style:none; }
+.footer-col ul li { margin-bottom:.6rem; }
+.footer-col ul li a { font-size:.82rem; color:var(--text-muted); text-decoration:none; transition:color .3s; letter-spacing:.05em; }
+.footer-col ul li a:hover { color:var(--gold); }
+.footer-bottom { max-width:1200px; margin:2rem auto 0; padding-top:2rem; border-top:1px solid rgba(201,168,76,.08); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+.footer-bottom p { font-size:.75rem; color:var(--text-muted); letter-spacing:.08em; }
+.footer-social { display:flex; gap:1rem; }
+.footer-social a { font-size:.8rem; color:var(--text-muted); text-decoration:none; transition:color .3s; }
+.footer-social a:hover { color:var(--gold); }
 
-  /* 漢堡選單 */
-  .nav-menu-btn {
-    display: none;
-    background: none; border: none;
-    cursor: pointer; padding: 8px;
-    flex-direction: column; gap: 5px;
-  }
-  .nav-menu-btn span {
-    display: block; width: 24px; height: 1px;
-    background: var(--gold);
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  .nav-menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .nav-menu-btn.open span:nth-child(2) { opacity: 0; }
-  .nav-menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+/* ── SCROLL TO TOP ── */
+.scrolltop {
+  position:fixed; bottom:2rem; right:2rem;
+  width:44px; height:44px; background:var(--dark2);
+  border:1px solid var(--border); color:var(--gold);
+  font-size:1.2rem; cursor:pointer; z-index:150;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity .3s;
+}
+.scrolltop.visible { opacity:1; }
 
-  .mobile-menu {
-    display: none;
-    position: fixed; top: 64px; left: 0; right: 0;
-    background: rgba(15,12,7,0.98);
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    z-index: 99; padding: 1.5rem 5%;
-    flex-direction: column; gap: 0;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    color: var(--text-muted); text-decoration: none;
-    font-size: 1rem; letter-spacing: 0.15em;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(201,168,76,0.1);
-    transition: color 0.3s;
-  }
-  .mobile-menu a:last-child { border-bottom: none; }
-  .mobile-menu a:active { color: var(--gold); }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .nav-menu-btn { display: flex; }
-
-    .hero { padding: 100px 6% 60px; min-height: auto; padding-top: 120px; }
-    .hero::before { font-size: 80vw; }
-    .hero-badge { font-size: 0.65rem; letter-spacing: 0.15em; }
-    .hero h2 { letter-spacing: 0.25em; margin-bottom: 2rem; }
-    .hero-stats { gap: 1.5rem; }
-    .stat-num { font-size: 1.5rem; }
-    .stat-label { font-size: 0.7rem; letter-spacing: 0.1em; }
-    .divider { height: 36px; }
-    .hero-desc { font-size: 0.9rem; }
-
-    section { padding: 60px 6%; }
-    .section-title { margin-bottom: 40px; }
-
-    .founder-block { grid-template-columns: 1fr; gap: 30px; }
-    .founder-img { display: none; }
-    .founder-name { font-size: 1.8rem; }
-    .founder-title { font-size: 0.8rem; letter-spacing: 0.1em; }
-    .founder-text { font-size: 0.9rem; line-height: 2; }
-
-    #programs { padding: 60px 6% !important; }
-    .programs-grid { grid-template-columns: 1fr; gap: 2px; }
-    .program-card { padding: 1.8rem 1.5rem; }
-
-    .support-hero { padding: 100px 6% 60px; min-height: auto; }
-    .support-hero h1 { letter-spacing: 0.15em; }
-
-    .plans-grid { grid-template-columns: 1fr; padding: 2rem 6% 60px; gap: 1.5rem; }
-    .plan-card { padding: 2rem 1.5rem; }
-
-    .contact-section { padding: 40px 6% 80px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
-    .contact-item { padding: 1.5rem; }
-
-    footer { padding: 2rem 6%; }
-  }
-
-  @media (max-width: 400px) {
-    .hero-stats { gap: 1rem; }
-    .stat-num { font-size: 1.2rem; }
-    .hero-badge { display: none; }
-  }
+/* ── RWD ── */
+@media (max-width:1024px) {
+  .footer-inner { grid-template-columns:1fr 1fr; }
+  .plans-grid { grid-template-columns:1fr; }
+}
+@media (max-width:768px) {
+  .nav-links { display:none; }
+  .nav-menu-btn { display:flex; }
+  .section { padding:60px 6%; }
+  .section-full { padding:60px 6%; }
+  .hero { padding:110px 6% 70px; }
+  .hero-bg { font-size:90vw; }
+  .hero-stats { gap:1.5rem; }
+  .stat-num { font-size:1.5rem; }
+  .stat-label { font-size:.7rem; }
+  .stat-div { height:36px; }
+  .hero-btns { flex-direction:column; align-items:center; }
+  .platform-grid { grid-template-columns:repeat(2,1fr); }
+  .prog-preview { grid-template-columns:1fr; }
+  .founder-grid { grid-template-columns:1fr; }
+  .founder-photo { display:none; }
+  .about-cards { grid-template-columns:1fr; }
+  .about-links { grid-template-columns:1fr; }
+  .prog-grid { grid-template-columns:repeat(2,1fr); }
+  .news-grid { grid-template-columns:1fr; }
+  .watch-grid { grid-template-columns:1fr; }
+  .merit-grid { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+  .footer-inner { grid-template-columns:1fr; gap:2rem; }
+  .footer-bottom { flex-direction:column; text-align:center; }
+  .cat-tabs { padding:0 6%; }
+  .news-tabs { padding:0 6%; }
+  .programs-hero,.about-hero,.news-hero,.watch-hero,.support-hero { padding:110px 6% 60px; }
+}
+@media (max-width:480px) {
+  .platform-grid { grid-template-columns:repeat(2,1fr); gap:1rem; }
+  .prog-grid { grid-template-columns:1fr; }
+  .hero-stats { gap:1rem; }
+  .stat-num { font-size:1.3rem; }
+}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">唯心電視台</div>
+  <div class="nav-logo" onclick="showPage('home')">唯心電視台</div>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')">頻道介紹</a></li>
-    <li><a href="#" onclick="showPage('home'); setTimeout(()=>scrollTo('programs'),100)">節目類型</a></li>
-    <li><a href="#" onclick="showPage('support')">護持廣告</a></li>
+    <li><a href="#" onclick="nav('home')" id="nl-home" class="active">首頁</a></li>
+    <li><a href="#" onclick="nav('about')" id="nl-about">關於我們</a></li>
+    <li><a href="#" onclick="nav('programs')" id="nl-programs">精選節目</a></li>
+    <li><a href="#" onclick="nav('news')" id="nl-news">消息資訊</a></li>
+    <li><a href="#" onclick="nav('watch')" id="nl-watch">收看方式</a></li>
+    <li><a href="#" onclick="nav('support')" id="nl-support">護持廣告</a></li>
   </ul>
-  <button class="nav-menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="選單">
+  <button class="nav-menu-btn" id="menuBtn" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#" onclick="showPage('home');closeMenu()">頻道介紹</a>
-  <a href="#" onclick="showPage('home');setTimeout(()=>scrollTo('programs'),100);closeMenu()">節目類型</a>
-  <a href="#" onclick="showPage('support');closeMenu()">護持廣告</a>
+  <a href="#" onclick="nav('home');closeMenu()" id="ml-home">首頁</a>
+  <a href="#" onclick="nav('about');closeMenu()" id="ml-about">關於我們</a>
+  <a href="#" onclick="nav('programs');closeMenu()" id="ml-programs">精選節目</a>
+  <a href="#" onclick="nav('news');closeMenu()" id="ml-news">消息資訊</a>
+  <a href="#" onclick="nav('watch');closeMenu()" id="ml-watch">收看方式</a>
+  <a href="#" onclick="nav('support');closeMenu()" id="ml-support">護持廣告</a>
 </div>
 
-<!-- HOME PAGE -->
+<!-- ════════════════ HOME ════════════════ -->
 <div id="page-home" class="page active">
 
   <div class="hero">
-    <div class="hero-badge">WEIXIN TELEVISION · 易經風水專業頻道</div>
+    <div class="hero-bg">☯</div>
+    <div class="badge">WEIXIN TELEVISION · 易經風水專業頻道</div>
     <h1>唯心電視台</h1>
     <h2>以心傳道　以易知命</h2>
     <div class="hero-stats">
@@ -448,224 +478,797 @@
         <div class="stat-num">2009</div>
         <div class="stat-label">年開播</div>
       </div>
-      <div class="divider"></div>
+      <div class="stat-div"></div>
       <div class="stat-item">
         <div class="stat-num">24H</div>
         <div class="stat-label">全天播出</div>
       </div>
-      <div class="divider"></div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">系列節目</div>
+      </div>
+      <div class="stat-div"></div>
       <div class="stat-item">
         <div class="stat-num">100%</div>
-        <div class="stat-label">全自製節目</div>
+        <div class="stat-label">全自製</div>
       </div>
     </div>
-    <p class="hero-desc">
-      台灣第一個以易經風水為核心的專業電視頻道，由宗主混元禪師創立，深耕易理、風水與生命實踐，為萬千觀眾照亮人生方向。
-    </p>
+    <p class="hero-desc">台灣第一個以易經風水為核心的專業電視頻道，由宗主混元禪師創立，深耕易理、風水與生命實踐，為萬千觀眾照亮人生方向。</p>
+    <div class="hero-btns">
+      <a href="http://wxtv.com.tw/public/" target="_blank" class="btn-solid">立即收看</a>
+      <button class="btn-gold" onclick="nav('programs')">瀏覽節目</button>
+    </div>
   </div>
 
-  <section>
+  <!-- Platform -->
+  <div class="platform-section">
+    <div class="platform-inner">
+      <div class="section-title">
+        <span class="en">Watch Anywhere</span>
+        <h2>多平台收看</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="platform-grid">
+        <a href="http://wxtv.com.tw/public/" target="_blank" class="platform-card">
+          <div class="platform-icon">🌐</div>
+          <div class="platform-name">網路電視</div>
+          <div class="platform-sub">wxtv.com.tw</div>
+        </a>
+        <a href="https://www.youtube.com/@weixintv" target="_blank" class="platform-card">
+          <div class="platform-icon">▶</div>
+          <div class="platform-name">YouTube</div>
+          <div class="platform-sub">線上免費收看</div>
+        </a>
+        <a href="https://play.google.com/store" target="_blank" class="platform-card">
+          <div class="platform-icon">📱</div>
+          <div class="platform-name">Android App</div>
+          <div class="platform-sub">Google Play 下載</div>
+        </a>
+        <a href="https://apps.apple.com" target="_blank" class="platform-card">
+          <div class="platform-icon">🍎</div>
+          <div class="platform-name">iOS App</div>
+          <div class="platform-sub">App Store 下載</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Programs -->
+  <div class="section">
     <div class="section-title">
-      <span class="en">Founder</span>
-      <h3>宗主・混元禪師</h3>
+      <span class="en">Featured Programs</span>
+      <h2>精選節目</h2>
       <div class="gold-line"></div>
     </div>
-    <div class="founder-block">
-      <div class="founder-img">☯</div>
+    <div class="prog-preview">
+      <div class="prog-card">
+        <div class="prog-icon">☰</div>
+        <div class="prog-tag">易理核心</div>
+        <div class="prog-name">混元禪師法語</div>
+        <p class="prog-desc">宗主混元禪師親授法語開示，傳遞易理精髓與人生智慧，為全台唯心學員最重要的修行依據。</p>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">羅</div>
+        <div class="prog-tag">風水堪輿</div>
+        <div class="prog-name">陽宅風水學傳法講座</div>
+        <p class="prog-desc">系統化傳授陽宅風水勘察要訣，從理論到實務，結合羅經運用與形局判斷。</p>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">卦</div>
+        <div class="prog-tag">生活易理</div>
+        <div class="prog-name">唯心天下事</div>
+        <p class="prog-desc">以易理分析時事與人生百態，禪師深入淺出的解說讓觀眾在生活中活用易學智慧。</p>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">經</div>
+        <div class="prog-tag">經典研習</div>
+        <div class="prog-name">易經心法講座</div>
+        <p class="prog-desc">深入解析易經六十四卦卦象、爻辭與義理，帶領學員掌握易理核心思想體系。</p>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">道</div>
+        <div class="prog-tag">宗教修持</div>
+        <div class="prog-name">全民念佛</div>
+        <p class="prog-desc">引領大眾透過念佛修持淨化身心，廣結善緣，為社會注入正向能量。</p>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">訪</div>
+        <div class="prog-tag">綜合節目</div>
+        <div class="prog-name">唯心週報・唯心論壇</div>
+        <p class="prog-desc">匯整每週易理精華，邀請各界嘉賓分享生命故事，深化觀眾對易學文化的認識。</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;">
+      <button class="btn-gold" onclick="nav('programs')">查看全部 50+ 節目</button>
+    </div>
+  </div>
+
+  <!-- Social -->
+  <div class="social-section" style="background:var(--dark2);">
+    <div class="section-title">
+      <span class="en">Follow Us</span>
+      <h2>關注我們</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="social-grid">
+      <a href="https://www.facebook.com" target="_blank" class="social-btn"><span class="icon">f</span> Facebook 社團</a>
+      <a href="https://www.youtube.com" target="_blank" class="social-btn"><span class="icon">▶</span> YouTube 頻道</a>
+      <a href="https://weibo.com" target="_blank" class="social-btn"><span class="icon">微</span> 新浪微博</a>
+      <a href="https://www.youku.com" target="_blank" class="social-btn"><span class="icon">優</span> 優酷視頻</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section" style="text-align:center;">
+    <div class="section-title">
+      <span class="en">Support Us</span>
+      <h2>護持唯心・廣種福田</h2>
+      <div class="gold-line"></div>
+    </div>
+    <p style="color:var(--text-muted);font-size:.92rem;max-width:500px;margin:0 auto 2.5rem;line-height:2;letter-spacing:.05em;">唯心電視台秉持弘揚易理、服務大眾的精神持續製播。歡迎以護持廣告或節目合作方式共同推廣易理文化。</p>
+    <button class="btn-gold" onclick="nav('support')">了解護持方案</button>
+  </div>
+
+</div>
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<div id="page-about" class="page">
+
+  <div class="about-hero">
+    <div class="badge">ABOUT US · 關於唯心</div>
+    <h1>以心傳道</h1>
+    <p>唯心電視台是台灣第一個以易經風水為核心的專業電視頻道，由宗主混元禪師於2009年創立，全頻道自製，24小時播出。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="en">Founder</span>
+      <h2>宗主・混元禪師</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="founder-grid">
+      <div class="founder-photo">☯</div>
       <div>
         <div class="founder-tag">FOUNDER / MASTER</div>
         <div class="founder-name">混元禪師</div>
-        <div class="founder-title">唯心電視台 宗主　／　易經風水宗師</div>
-        <p class="founder-text">
-          混元禪師深研易學數十年，融匯儒、釋、道三教精髓，以易經為核心建立完整的生命智慧體系。2009年創辦唯心電視台，以電視媒體作為弘法利生之道場，親自主講易經、風水、命理及各類生活實踐課程。
-          <br><br>
-          禪師所倡「唯心」之道，強調萬法唯心造，以心轉命，引領學員在日常生活中落實易理，開展人生格局。節目累積播出逾萬小時，觀眾遍及兩岸三地及海內外華人社群。
-        </p>
+        <div class="founder-title">唯心電視台 宗主　／　易經風水宗師　／　禪機山仙佛寺開山祖師</div>
+        <div class="founder-body">
+          <p>混元禪師深研易學數十年，融匯儒、釋、道三教精髓，以易經為核心建立完整的生命智慧體系。2009年創辦唯心電視台，以電視媒體作為弘法利生之道場，親自主講易經、風水、命理及各類生活實踐課程。</p>
+          <p>禪師所倡「唯心」之道，強調萬法唯心造，以心轉命，引領學員在日常生活中落實易理，開展人生格局。節目累積播出逾萬小時，觀眾遍及兩岸三地及海內外華人社群。</p>
+          <p>禪師創立禪機山仙佛寺，傳承王禪老祖玄妙真經，並設立唯心聖教易經大學，培育易理傳承人才，致力將中華文化智慧推廣至全球。</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="programs" style="background: var(--dark2); max-width: none; padding: 100px 10%;">
-    <div style="max-width: 1200px; margin: 0 auto;">
+  <div style="background:var(--dark2);padding:1px 0;">
+    <div class="section">
       <div class="section-title">
-        <span class="en">Programs</span>
-        <h3>節目類型</h3>
+        <span class="en">Our Mission</span>
+        <h2>頻道理念</h2>
         <div class="gold-line"></div>
       </div>
-      <div class="programs-grid">
-        <div class="program-card">
-          <div class="program-icon">☰</div>
-          <div class="program-name">易經研習</div>
-          <p class="program-desc">深入解析六十四卦卦象、爻辭與義理，帶領學員掌握易理核心，運用於生活判斷與人生抉擇。</p>
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-card-icon">☯</div>
+          <div class="about-card-title">傳承易理文化</div>
+          <p class="about-card-text">以現代媒體傳播中華五千年易學文化精髓，讓古老智慧在當代生活中持續發光發熱。</p>
         </div>
-        <div class="program-card">
-          <div class="program-icon">羅</div>
-          <div class="program-name">風水堪輿</div>
-          <p class="program-desc">住宅、商辦、墓地風水實務解析，羅經運用與形局判斷，結合傳統風水理法與現代居家環境。</p>
+        <div class="about-card">
+          <div class="about-card-icon">🏠</div>
+          <div class="about-card-title">利益社會大眾</div>
+          <p class="about-card-text">透過易經、風水、命理等實用課程，幫助觀眾趨吉避凶，改善生活品質，開創美好未來。</p>
         </div>
-        <div class="program-card">
-          <div class="program-icon">命</div>
-          <div class="program-name">命理推算</div>
-          <p class="program-desc">八字、紫微、卜卦等命理體系完整教學，協助學員了解天命格局，趨吉避凶、把握人生時機。</p>
-        </div>
-        <div class="program-card">
-          <div class="program-icon">道</div>
-          <div class="program-name">生活法實踐</div>
-          <p class="program-desc">將易理落實於日常，涵蓋家庭倫理、事業發展、人際關係、健康養生等生活面向的智慧指引。</p>
-        </div>
-        <div class="program-card">
-          <div class="program-icon">訪</div>
-          <div class="program-name">訪談節目</div>
-          <p class="program-desc">邀請各界人士分享人生故事與易理驗證，透過真實案例深化觀眾對命理智慧的理解與認同。</p>
-        </div>
-        <div class="program-card">
-          <div class="program-icon">法</div>
-          <div class="program-name">特別節目</div>
-          <p class="program-desc">重要節氣、法會、紀念活動之特別製播，匯集禪師精要開示，深具收藏與傳承價值。</p>
+        <div class="about-card">
+          <div class="about-card-icon">🌏</div>
+          <div class="about-card-title">推廣和平文化</div>
+          <p class="about-card-text">以易理促進人與人之間的和諧共處，以心傳道、廣結善緣，為世界和平注入正向力量。</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section style="text-align: center;">
-    <p style="color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 2rem;">
-      認同唯心電視台的理念，歡迎以護持廣告、節目合作共同推廣易理文化
-    </p>
-    <button onclick="showPage('support')" style="
-      background: none; border: 1px solid var(--gold);
-      color: var(--gold); padding: 1rem 3rem;
-      font-size: 0.9rem; letter-spacing: 0.3em;
-      cursor: pointer; font-family: inherit;
-      transition: background 0.3s, color 0.3s;
-    " onmouseover="this.style.background='#c9a84c';this.style.color='#0f0c07'"
-       onmouseout="this.style.background='none';this.style.color='#c9a84c'">
-      了解護持方案
-    </button>
-  </section>
+  <div class="section">
+    <div class="section-title">
+      <span class="en">Related Organizations</span>
+      <h2>相關單位</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="about-links">
+      <a href="https://wxtv.com.tw" target="_blank" class="about-link-card">
+        <div class="about-link-label">TEMPLE</div>
+        <div class="about-link-name">禪機山仙佛寺</div>
+        <p class="about-link-desc">混元禪師開山道場，傳承王禪老祖玄妙真經，為唯心聖教信眾修行聖地。</p>
+      </a>
+      <a href="https://wxtv.com.tw" target="_blank" class="about-link-card">
+        <div class="about-link-label">EDUCATION</div>
+        <div class="about-link-name">唯心聖教易經大學</div>
+        <p class="about-link-desc">系統化易理教育機構，培育易學研究與實踐人才，傳承中華文化精髓。</p>
+      </a>
+      <a href="https://wxtv.com.tw" target="_blank" class="about-link-card">
+        <div class="about-link-label">SHOPPING</div>
+        <div class="about-link-name">禪機山購物</div>
+        <p class="about-link-desc">提供唯心聖教相關文化商品，廣結善緣，護持法務推廣。</p>
+      </a>
+      <a href="https://wxtv.com.tw" target="_blank" class="about-link-card">
+        <div class="about-link-label">MEMBERSHIP</div>
+        <div class="about-link-name">電視弘法會員</div>
+        <p class="about-link-desc">加入電視弘法會員，深入學習易理課程，與全球唯心學員共修。</p>
+      </a>
+    </div>
+  </div>
 
 </div>
 
-<!-- SUPPORT PAGE -->
+<!-- ════════════════ PROGRAMS ════════════════ -->
+<div id="page-programs" class="page">
+
+  <div class="programs-hero">
+    <div class="badge">PROGRAMS · 精選節目</div>
+    <h1>50+ 系列節目</h1>
+    <p>涵蓋法語教學、風水堪輿、經典研習、生活易理、綜合娛樂等多元類型</p>
+  </div>
+
+  <div class="cat-tabs" id="catTabs">
+    <button class="cat-tab active" onclick="switchCat(0)">全部節目</button>
+    <button class="cat-tab" onclick="switchCat(1)">法語教學</button>
+    <button class="cat-tab" onclick="switchCat(2)">風水堪輿</button>
+    <button class="cat-tab" onclick="switchCat(3)">經典研習</button>
+    <button class="cat-tab" onclick="switchCat(4)">生活易理</button>
+    <button class="cat-tab" onclick="switchCat(5)">綜合節目</button>
+    <button class="cat-tab" onclick="switchCat(6)">兒童英語</button>
+    <button class="cat-tab" onclick="switchCat(7)">宗教祭典</button>
+  </div>
+
+  <div style="padding:2px 10% 80px;max-width:1400px;margin:0 auto;">
+
+    <!-- 全部 -->
+    <div class="cat-content active" id="cat-0">
+      <div class="prog-grid">
+        <div class="prog-item"><div class="prog-item-icon">☰</div><div class="prog-item-name">混元禪師法語</div><div class="prog-item-ep">法語教學</div></div>
+        <div class="prog-item"><div class="prog-item-icon">卦</div><div class="prog-item-name">唯心天下事</div><div class="prog-item-ep">生活易理</div></div>
+        <div class="prog-item"><div class="prog-item-icon">經</div><div class="prog-item-name">易經心法講座</div><div class="prog-item-ep">法語教學</div></div>
+        <div class="prog-item"><div class="prog-item-icon">道</div><div class="prog-item-name">全民念佛</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">羅</div><div class="prog-item-name">陽宅風水學傳法講座</div><div class="prog-item-ep">風水堪輿</div></div>
+        <div class="prog-item"><div class="prog-item-icon">週</div><div class="prog-item-name">唯心週報</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">壇</div><div class="prog-item-name">唯心論壇</div><div class="prog-item-ep">生活易理</div></div>
+        <div class="prog-item"><div class="prog-item-icon">玄</div><div class="prog-item-name">王禪老祖玄妙真經</div><div class="prog-item-ep">經典研習</div></div>
+        <div class="prog-item"><div class="prog-item-icon">鄰</div><div class="prog-item-name">好厝邊</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">榜</div><div class="prog-item-name">世界和平推手功德榜</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">健</div><div class="prog-item-name">全民健康保健</div><div class="prog-item-ep">生活易理</div></div>
+        <div class="prog-item"><div class="prog-item-icon">利</div><div class="prog-item-name">義工利人天</div><div class="prog-item-ep">生活易理</div></div>
+        <div class="prog-item"><div class="prog-item-icon">金</div><div class="prog-item-name">金剛般若波羅蜜經</div><div class="prog-item-ep">經典研習</div></div>
+        <div class="prog-item"><div class="prog-item-icon">易</div><div class="prog-item-name">用易利人天</div><div class="prog-item-ep">生活易理</div></div>
+        <div class="prog-item"><div class="prog-item-icon">鬼</div><div class="prog-item-name">鬼谷仙師天德經</div><div class="prog-item-ep">經典研習</div></div>
+        <div class="prog-item"><div class="prog-item-icon">旅</div><div class="prog-item-name">印心之旅</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">禮</div><div class="prog-item-name">禮運大同篇</div><div class="prog-item-ep">經典研習</div></div>
+        <div class="prog-item"><div class="prog-item-icon">祭</div><div class="prog-item-name">中華民族聯合祭祖大典</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">問</div><div class="prog-item-name">道場問事簡介</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">開</div><div class="prog-item-name">混元禪師隨緣開示</div><div class="prog-item-ep">法語教學</div></div>
+        <div class="prog-item"><div class="prog-item-icon">青</div><div class="prog-item-name">青年易點通</div><div class="prog-item-ep">兒童英語</div></div>
+        <div class="prog-item"><div class="prog-item-icon">安</div><div class="prog-item-name">唯心聖教安心真經</div><div class="prog-item-ep">經典研習</div></div>
+        <div class="prog-item"><div class="prog-item-icon">仙</div><div class="prog-item-name">仙佛在我家</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">威</div><div class="prog-item-name">混元禪師寶誥王禪老祖天威</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">甜</div><div class="prog-item-name">甜園交響曲</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">祖</div><div class="prog-item-name">祖德流芳</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">廚</div><div class="prog-item-name">天廚妙供</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">宅</div><div class="prog-item-name">來到我家看風水</div><div class="prog-item-ep">風水堪輿</div></div>
+        <div class="prog-item"><div class="prog-item-icon">人</div><div class="prog-item-name">用易與人生</div><div class="prog-item-ep">生活易理</div></div>
+        <div class="prog-item"><div class="prog-item-icon">故</div><div class="prog-item-name">唯心故事</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">藝</div><div class="prog-item-name">藝術大道</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">讚</div><div class="prog-item-name">恭讚王禪老祖教主天威讚偈</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">兒</div><div class="prog-item-name">兒童學易經</div><div class="prog-item-ep">兒童英語</div></div>
+        <div class="prog-item"><div class="prog-item-icon">財</div><div class="prog-item-name">鬼谷仙師五路財神經</div><div class="prog-item-ep">經典研習</div></div>
+        <div class="prog-item"><div class="prog-item-icon">學</div><div class="prog-item-name">大家來學易經</div><div class="prog-item-ep">兒童英語</div></div>
+        <div class="prog-item"><div class="prog-item-icon">英</div><div class="prog-item-name">唯心說英文</div><div class="prog-item-ep">兒童英語</div></div>
+        <div class="prog-item"><div class="prog-item-icon">觀</div><div class="prog-item-name">用易人生觀</div><div class="prog-item-ep">生活易理</div></div>
+        <div class="prog-item"><div class="prog-item-icon">英週</div><div class="prog-item-name">唯心英語週報</div><div class="prog-item-ep">兒童英語</div></div>
+        <div class="prog-item"><div class="prog-item-icon">慈</div><div class="prog-item-name">慈悲靈感王禪老祖</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">行</div><div class="prog-item-name">混元禪師行道功德天</div><div class="prog-item-ep">法語教學</div></div>
+        <div class="prog-item"><div class="prog-item-icon">阿</div><div class="prog-item-name">阿彌陀經</div><div class="prog-item-ep">經典研習</div></div>
+        <div class="prog-item"><div class="prog-item-icon">面</div><div class="prog-item-name">易經風水面面觀</div><div class="prog-item-ep">風水堪輿</div></div>
+        <div class="prog-item"><div class="prog-item-icon">台商</div><div class="prog-item-name">臺商會</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">廠</div><div class="prog-item-name">工廠風水經</div><div class="prog-item-ep">風水堪輿</div></div>
+        <div class="prog-item"><div class="prog-item-icon">藥</div><div class="prog-item-name">藥師寶懺</div><div class="prog-item-ep">經典研習</div></div>
+        <div class="prog-item"><div class="prog-item-icon">灶</div><div class="prog-item-name">文平嫂的灶咖</div><div class="prog-item-ep">綜合節目</div></div>
+        <div class="prog-item"><div class="prog-item-icon">地</div><div class="prog-item-name">大地風水</div><div class="prog-item-ep">風水堪輿</div></div>
+        <div class="prog-item"><div class="prog-item-icon">真</div><div class="prog-item-name">風水真經</div><div class="prog-item-ep">風水堪輿</div></div>
+        <div class="prog-item"><div class="prog-item-icon">大學</div><div class="prog-item-name">唯心聖教易經大學</div><div class="prog-item-ep">法語教學</div></div>
+        <div class="prog-item"><div class="prog-item-icon">院</div><div class="prog-item-name">唯心聖教學院</div><div class="prog-item-ep">法語教學</div></div>
+        <div class="prog-item"><div class="prog-item-icon">消</div><div class="prog-item-name">消災化劫功德榜</div><div class="prog-item-ep">宗教祭典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">法</div><div class="prog-item-name">唯心法語</div><div class="prog-item-ep">法語教學</div></div>
+        <div class="prog-item"><div class="prog-item-icon">宗</div><div class="prog-item-name">台灣宗教學會</div><div class="prog-item-ep">綜合節目</div></div>
+      </div>
+    </div>
+
+    <!-- 法語教學 -->
+    <div class="cat-content" id="cat-1">
+      <div class="prog-grid">
+        <div class="prog-item"><div class="prog-item-icon">☰</div><div class="prog-item-name">混元禪師法語</div></div>
+        <div class="prog-item"><div class="prog-item-icon">經</div><div class="prog-item-name">易經心法講座</div></div>
+        <div class="prog-item"><div class="prog-item-icon">開</div><div class="prog-item-name">混元禪師隨緣開示</div></div>
+        <div class="prog-item"><div class="prog-item-icon">行</div><div class="prog-item-name">混元禪師行道功德天</div></div>
+        <div class="prog-item"><div class="prog-item-icon">大學</div><div class="prog-item-name">唯心聖教易經大學</div></div>
+        <div class="prog-item"><div class="prog-item-icon">院</div><div class="prog-item-name">唯心聖教學院</div></div>
+        <div class="prog-item"><div class="prog-item-icon">法</div><div class="prog-item-name">唯心法語</div></div>
+      </div>
+    </div>
+
+    <!-- 風水堪輿 -->
+    <div class="cat-content" id="cat-2">
+      <div class="prog-grid">
+        <div class="prog-item"><div class="prog-item-icon">羅</div><div class="prog-item-name">陽宅風水學傳法講座</div></div>
+        <div class="prog-item"><div class="prog-item-icon">真</div><div class="prog-item-name">風水真經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">地</div><div class="prog-item-name">大地風水</div></div>
+        <div class="prog-item"><div class="prog-item-icon">宅</div><div class="prog-item-name">來到我家看風水</div></div>
+        <div class="prog-item"><div class="prog-item-icon">廠</div><div class="prog-item-name">工廠風水經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">面</div><div class="prog-item-name">易經風水面面觀</div></div>
+      </div>
+    </div>
+
+    <!-- 經典研習 -->
+    <div class="cat-content" id="cat-3">
+      <div class="prog-grid">
+        <div class="prog-item"><div class="prog-item-icon">金</div><div class="prog-item-name">金剛般若波羅蜜經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">阿</div><div class="prog-item-name">阿彌陀經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">藥</div><div class="prog-item-name">藥師寶懺</div></div>
+        <div class="prog-item"><div class="prog-item-icon">玄</div><div class="prog-item-name">王禪老祖玄妙真經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">安</div><div class="prog-item-name">唯心聖教安心真經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">鬼</div><div class="prog-item-name">鬼谷仙師天德經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">財</div><div class="prog-item-name">鬼谷仙師五路財神經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">禮</div><div class="prog-item-name">禮運大同篇</div></div>
+      </div>
+    </div>
+
+    <!-- 生活易理 -->
+    <div class="cat-content" id="cat-4">
+      <div class="prog-grid">
+        <div class="prog-item"><div class="prog-item-icon">卦</div><div class="prog-item-name">唯心天下事</div></div>
+        <div class="prog-item"><div class="prog-item-icon">易</div><div class="prog-item-name">用易利人天</div></div>
+        <div class="prog-item"><div class="prog-item-icon">人</div><div class="prog-item-name">用易與人生</div></div>
+        <div class="prog-item"><div class="prog-item-icon">觀</div><div class="prog-item-name">用易人生觀</div></div>
+        <div class="prog-item"><div class="prog-item-icon">壇</div><div class="prog-item-name">唯心論壇</div></div>
+        <div class="prog-item"><div class="prog-item-icon">健</div><div class="prog-item-name">全民健康保健</div></div>
+        <div class="prog-item"><div class="prog-item-icon">利</div><div class="prog-item-name">義工利人天</div></div>
+      </div>
+    </div>
+
+    <!-- 綜合節目 -->
+    <div class="cat-content" id="cat-5">
+      <div class="prog-grid">
+        <div class="prog-item"><div class="prog-item-icon">週</div><div class="prog-item-name">唯心週報</div></div>
+        <div class="prog-item"><div class="prog-item-icon">鄰</div><div class="prog-item-name">好厝邊</div></div>
+        <div class="prog-item"><div class="prog-item-icon">旅</div><div class="prog-item-name">印心之旅</div></div>
+        <div class="prog-item"><div class="prog-item-icon">甜</div><div class="prog-item-name">甜園交響曲</div></div>
+        <div class="prog-item"><div class="prog-item-icon">祖</div><div class="prog-item-name">祖德流芳</div></div>
+        <div class="prog-item"><div class="prog-item-icon">廚</div><div class="prog-item-name">天廚妙供</div></div>
+        <div class="prog-item"><div class="prog-item-icon">故</div><div class="prog-item-name">唯心故事</div></div>
+        <div class="prog-item"><div class="prog-item-icon">藝</div><div class="prog-item-name">藝術大道</div></div>
+        <div class="prog-item"><div class="prog-item-icon">台商</div><div class="prog-item-name">臺商會</div></div>
+        <div class="prog-item"><div class="prog-item-icon">灶</div><div class="prog-item-name">文平嫂的灶咖</div></div>
+        <div class="prog-item"><div class="prog-item-icon">宗</div><div class="prog-item-name">台灣宗教學會</div></div>
+      </div>
+    </div>
+
+    <!-- 兒童英語 -->
+    <div class="cat-content" id="cat-6">
+      <div class="prog-grid">
+        <div class="prog-item"><div class="prog-item-icon">兒</div><div class="prog-item-name">兒童學易經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">大家</div><div class="prog-item-name">大家來學易經</div></div>
+        <div class="prog-item"><div class="prog-item-icon">英</div><div class="prog-item-name">唯心說英文</div></div>
+        <div class="prog-item"><div class="prog-item-icon">英週</div><div class="prog-item-name">唯心英語週報</div></div>
+        <div class="prog-item"><div class="prog-item-icon">青</div><div class="prog-item-name">青年易點通</div></div>
+      </div>
+    </div>
+
+    <!-- 宗教祭典 -->
+    <div class="cat-content" id="cat-7">
+      <div class="prog-grid">
+        <div class="prog-item"><div class="prog-item-icon">道</div><div class="prog-item-name">全民念佛</div></div>
+        <div class="prog-item"><div class="prog-item-icon">榜</div><div class="prog-item-name">世界和平推手功德榜</div></div>
+        <div class="prog-item"><div class="prog-item-icon">祭</div><div class="prog-item-name">中華民族聯合祭祖大典</div></div>
+        <div class="prog-item"><div class="prog-item-icon">問</div><div class="prog-item-name">道場問事簡介</div></div>
+        <div class="prog-item"><div class="prog-item-icon">仙</div><div class="prog-item-name">仙佛在我家</div></div>
+        <div class="prog-item"><div class="prog-item-icon">威</div><div class="prog-item-name">混元禪師寶誥王禪老祖天威</div></div>
+        <div class="prog-item"><div class="prog-item-icon">讚</div><div class="prog-item-name">恭讚王禪老祖教主天威讚偈</div></div>
+        <div class="prog-item"><div class="prog-item-icon">慈</div><div class="prog-item-name">慈悲靈感王禪老祖</div></div>
+        <div class="prog-item"><div class="prog-item-icon">消</div><div class="prog-item-name">消災化劫功德榜</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════ NEWS ════════════════ -->
+<div id="page-news" class="page">
+
+  <div class="news-hero">
+    <div class="badge">NEWS · 消息資訊</div>
+    <h1>消息與資訊</h1>
+  </div>
+
+  <div class="news-tabs">
+    <button class="news-tab active" onclick="switchNews(0)">最新消息</button>
+    <button class="news-tab" onclick="switchNews(1)">唯心証道</button>
+    <button class="news-tab" onclick="switchNews(2)">節目表</button>
+    <button class="news-tab" onclick="switchNews(3)">實用資訊</button>
+  </div>
+
+  <!-- 最新消息 -->
+  <div id="news-0" style="padding:2px 10% 80px;max-width:1400px;margin:0 auto;">
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-date">2026 · 05</div>
+        <div class="news-title">唯心聖教學院112學年度畢業典禮圓滿舉行</div>
+        <p class="news-excerpt">唯心聖教學院年度盛事，眾多學員圓滿完成修業，承接易理文化傳承使命。</p>
+      </div>
+      <div class="news-card">
+        <div class="news-date">2026 · 04</div>
+        <div class="news-title">陽宅風水學傳法講座第262集精彩更新</div>
+        <p class="news-excerpt">混元禪師持續傳授陽宅風水精要，深入解析形局判斷與羅經運用實務。</p>
+      </div>
+      <div class="news-card">
+        <div class="news-date">2026 · 03</div>
+        <div class="news-title">消災化劫功德榜開放報名</div>
+        <p class="news-excerpt">廣種福田、消災納福，歡迎十方善信登記參與消災化劫功德榜法務活動。</p>
+      </div>
+      <div class="news-card">
+        <div class="news-date">2026 · 02</div>
+        <div class="news-title">世界和平推手功德榜年度統計公布</div>
+        <p class="news-excerpt">年度世界和平推手功德榜統計出爐，感恩十方善信共同為世界和平貢獻心力。</p>
+      </div>
+      <div class="news-card">
+        <div class="news-date">2026 · 01</div>
+        <div class="news-title">唯心電視台新年特別節目隆重播出</div>
+        <p class="news-excerpt">歲末年初，唯心電視台推出年度特別節目，匯集禪師精要開示，祈願眾生吉祥平安。</p>
+      </div>
+      <div class="news-card">
+        <div class="news-date">2025 · 12</div>
+        <div class="news-title">唯心聖教易經大學新學期招生公告</div>
+        <p class="news-excerpt">唯心聖教易經大學開放新學期報名，系統化學習易理，傳承中華文化精髓。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 唯心証道 -->
+  <div id="news-1" style="display:none;padding:2px 10% 80px;max-width:1400px;margin:0 auto;">
+    <div style="padding:60px 0;text-align:center;">
+      <div style="font-size:3rem;color:var(--gold);margin-bottom:1.5rem;">道</div>
+      <h3 style="font-size:1.3rem;letter-spacing:.2em;color:var(--text);margin-bottom:1rem;">唯心証道</h3>
+      <p style="color:var(--text-muted);font-size:.9rem;max-width:480px;margin:0 auto 2rem;line-height:2;">學員修行心得與証道分享，見證易理在生活中的實踐與轉化，為後學提供修行指引。</p>
+      <a href="http://wxtv.com.tw/public/" target="_blank" class="btn-gold">前往唯心網路電視觀看</a>
+    </div>
+  </div>
+
+  <!-- 節目表 -->
+  <div id="news-2" style="display:none;padding:40px 10% 80px;max-width:1400px;margin:0 auto;">
+    <div style="margin-bottom:2rem;">
+      <p style="color:var(--text-muted);font-size:.88rem;letter-spacing:.08em;line-height:2;">唯心電視台24小時全天播出，節目表每週更新，最新節目表請至官方網站查閱。</p>
+    </div>
+    <table class="channel-table">
+      <tr><th>時段</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+      <tr><td>06:00</td><td colspan="7" style="text-align:center;color:var(--gold);">混元禪師法語</td></tr>
+      <tr><td>08:00</td><td colspan="7" style="text-align:center;">唯心天下事</td></tr>
+      <tr><td>10:00</td><td colspan="5" style="text-align:center;">陽宅風水學傳法講座</td><td colspan="2" style="text-align:center;">唯心週報</td></tr>
+      <tr><td>12:00</td><td colspan="7" style="text-align:center;color:var(--gold);">易經心法講座</td></tr>
+      <tr><td>14:00</td><td colspan="7" style="text-align:center;">精選節目輪播</td></tr>
+      <tr><td>16:00</td><td colspan="7" style="text-align:center;">混元禪師隨緣開示</td></tr>
+      <tr><td>18:00</td><td colspan="7" style="text-align:center;color:var(--gold);">唯心天下事（重播）</td></tr>
+      <tr><td>20:00</td><td colspan="7" style="text-align:center;">當日精選節目</td></tr>
+      <tr><td>22:00</td><td colspan="7" style="text-align:center;">全民念佛</td></tr>
+      <tr><td>00:00</td><td colspan="7" style="text-align:center;">精選節目重播</td></tr>
+    </table>
+    <p style="color:var(--text-muted);font-size:.78rem;margin-top:1.5rem;letter-spacing:.08em;">※ 節目表僅供參考，實際播出以電視台公告為準。</p>
+  </div>
+
+  <!-- 實用資訊 -->
+  <div id="news-3" style="display:none;padding:2px 10% 80px;max-width:1400px;margin:0 auto;">
+    <div class="info-grid">
+      <a href="http://wxtv.com.tw/public/" target="_blank" class="info-card">
+        <div class="info-card-icon">📅</div>
+        <div class="info-card-name">董公擇日</div>
+        <p class="info-card-desc">傳統擇日吉時查詢，為婚嫁、開市、動土等重要事項選擇吉日吉時。</p>
+      </a>
+      <a href="http://wxtv.com.tw/public/" target="_blank" class="info-card">
+        <div class="info-card-icon">📺</div>
+        <div class="info-card-name">電視頻道一覽表</div>
+        <p class="info-card-desc">全台有線電視及衛星頻道收視號碼一覽，快速找到唯心電視台。</p>
+      </a>
+      <a href="http://wxtv.com.tw/public/" target="_blank" class="info-card">
+        <div class="info-card-icon">📖</div>
+        <div class="info-card-name">唯心詞庫</div>
+        <p class="info-card-desc">易理、風水、命理專業術語解釋，為學員提供完整知識查詢工具。</p>
+      </a>
+      <a href="http://wxtv.com.tw/public/" target="_blank" class="info-card">
+        <div class="info-card-icon">🌏</div>
+        <div class="info-card-name">中華三祖文化</div>
+        <p class="info-card-desc">探討中華民族三祖文化淵源，傳承祖德，弘揚中華文明精髓。</p>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════ WATCH ════════════════ -->
+<div id="page-watch" class="page">
+
+  <div class="watch-hero">
+    <div class="badge">WATCH · 收看方式</div>
+    <h1>隨時隨地收看</h1>
+    <p>唯心電視台提供多種收看管道，讓您在任何裝置上都能收看精彩節目。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="en">Platforms</span>
+      <h2>收看平台</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="watch-grid">
+      <a href="http://wxtv.com.tw/public/" target="_blank" class="watch-card">
+        <div class="watch-card-icon">🌐</div>
+        <div class="watch-card-name">網路電視</div>
+        <p class="watch-card-desc">至 wxtv.com.tw 直接線上收看，無需下載，支援電腦及行動裝置瀏覽器。</p>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" class="watch-card">
+        <div class="watch-card-icon">▶</div>
+        <div class="watch-card-name">YouTube 頻道</div>
+        <p class="watch-card-desc">訂閱唯心電視台 YouTube 頻道，隨時回播精彩節目，免費收看不受限。</p>
+      </a>
+      <a href="https://play.google.com/store" target="_blank" class="watch-card">
+        <div class="watch-card-icon">📱</div>
+        <div class="watch-card-name">Android App</div>
+        <p class="watch-card-desc">至 Google Play 下載唯心電視台 App，手機平板隨時隨地收看。</p>
+      </a>
+      <a href="https://apps.apple.com" target="_blank" class="watch-card">
+        <div class="watch-card-icon">🍎</div>
+        <div class="watch-card-name">iOS App</div>
+        <p class="watch-card-desc">至 App Store 下載唯心電視台 App，iPhone、iPad 完整支援。</p>
+      </a>
+      <a href="https://www.facebook.com" target="_blank" class="watch-card">
+        <div class="watch-card-icon">f</div>
+        <div class="watch-card-name">Facebook 社團</div>
+        <p class="watch-card-desc">加入唯心電視臉書社團，即時掌握最新消息、直播通知及互動交流。</p>
+      </a>
+      <a href="https://weibo.com" target="_blank" class="watch-card">
+        <div class="watch-card-icon">微</div>
+        <div class="watch-card-name">新浪微博 / 優酷</div>
+        <p class="watch-card-desc">兩岸三地觀眾可透過微博及優酷平台收看唯心電視台精選節目內容。</p>
+      </a>
+    </div>
+  </div>
+
+  <div style="background:var(--dark2);padding:1px 0;">
+    <div class="section">
+      <div class="section-title">
+        <span class="en">Cable & Satellite</span>
+        <h2>有線電視頻道</h2>
+        <div class="gold-line"></div>
+      </div>
+      <p style="color:var(--text-muted);font-size:.88rem;margin-bottom:2rem;letter-spacing:.05em;">詳細頻道號碼依各地區有線電視系統而異，請至官方網站查閱最新電視頻道一覽表。</p>
+      <table class="channel-table">
+        <tr>
+          <th>地區</th>
+          <th>系統台</th>
+          <th>頻道</th>
+        </tr>
+        <tr><td>台中地區</td><td>台灣數位光訊</td><td>請至官網查詢</td></tr>
+        <tr><td>全台</td><td>MOD 中華電信</td><td>請至官網查詢</td></tr>
+        <tr><td>全球</td><td>網路電視</td><td>wxtv.com.tw</td></tr>
+        <tr><td>全球</td><td>YouTube</td><td>線上免費收看</td></tr>
+      </table>
+      <div style="text-align:center;margin-top:2.5rem;">
+        <a href="http://wxtv.com.tw/public/" target="_blank" class="btn-gold">查看完整頻道一覽表</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════ SUPPORT ════════════════ -->
 <div id="page-support" class="page">
 
   <div class="support-hero">
-    <div class="hero-badge" style="margin-bottom: 1.5rem;">SUPPORT US · 護持電視台</div>
+    <div class="badge">SUPPORT · 護持廣告</div>
     <h1>護持唯心・廣種福田</h1>
-    <p style="margin-top: 1.5rem;">
-      唯心電視台秉持弘揚易理、服務大眾的精神持續製播。歡迎各界善信、企業夥伴，以護持廣告或節目合作方式，共同推廣易理文化，廣結善緣。
-    </p>
+    <p>唯心電視台秉持弘揚易理、服務大眾的精神持續製播。歡迎各界善信、企業夥伴以護持廣告或節目合作方式，共同推廣易理文化，廣結善緣。</p>
   </div>
 
-  <div class="plans-grid">
-
-    <div class="plan-card">
-      <div class="plan-name">BASIC</div>
-      <div class="plan-title">基礎護持廣告</div>
-      <ul class="plan-features">
-        <li>頻道字卡廣告播出</li>
-        <li>每日固定時段播放</li>
-        <li>廣告設計製作協助</li>
-        <li>月結播出報告</li>
-        <li>官網廣告商欄位露出</li>
-      </ul>
-      <button class="plan-cta" onclick="scrollToContact()">洽詢方案</button>
-    </div>
-
-    <div class="plan-card featured">
-      <div class="plan-name">STANDARD</div>
-      <div class="plan-title">節目冠名護持</div>
-      <ul class="plan-features">
-        <li>指定節目冠名播出</li>
-        <li>節目前後廣告時段</li>
-        <li>專屬廣告影片製作</li>
-        <li>禪師開示結尾致謝</li>
-        <li>官網首頁合作夥伴露出</li>
-        <li>社群媒體聯合推廣</li>
-      </ul>
-      <button class="plan-cta" onclick="scrollToContact()">洽詢方案</button>
-    </div>
-
-    <div class="plan-card">
-      <div class="plan-name">PREMIUM</div>
-      <div class="plan-title">節目合作製播</div>
-      <ul class="plan-features">
-        <li>客製化節目共同製作</li>
-        <li>禪師親自參與錄製</li>
-        <li>全媒體平台聯播</li>
-        <li>專屬節目官網頁面</li>
-        <li>實體活動優先合作</li>
-        <li>長期策略夥伴關係</li>
-      </ul>
-      <button class="plan-cta" onclick="scrollToContact()">洽詢方案</button>
-    </div>
-
-  </div>
-
-  <div class="contact-section" id="contact">
+  <div class="section">
     <div class="section-title">
-      <span class="en">Contact</span>
-      <h3>聯絡我們</h3>
+      <span class="en">Sponsorship Plans</span>
+      <h2>護持廣告方案</h2>
       <div class="gold-line"></div>
     </div>
-    <p style="color: var(--text-muted); font-size: 0.9rem; letter-spacing: 0.1em; margin-top: 1.5rem;">
-      歡迎來信或來電洽詢，我們將由專人為您說明各項護持合作方案。
-    </p>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-tier">BASIC</div>
+        <div class="plan-name">基礎護持廣告</div>
+        <ul class="plan-features">
+          <li>頻道字卡廣告播出</li>
+          <li>每日固定時段播放</li>
+          <li>廣告設計製作協助</li>
+          <li>月結播出報告</li>
+          <li>官網廣告商欄位露出</li>
+        </ul>
+        <button class="plan-cta" onclick="document.getElementById('contact-block').scrollIntoView({behavior:'smooth'})">洽詢方案</button>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-tier">STANDARD</div>
+        <div class="plan-name">節目冠名護持</div>
+        <ul class="plan-features">
+          <li>指定節目冠名播出</li>
+          <li>節目前後廣告時段</li>
+          <li>專屬廣告影片製作</li>
+          <li>禪師開示結尾致謝</li>
+          <li>官網首頁合作夥伴露出</li>
+          <li>社群媒體聯合推廣</li>
+        </ul>
+        <button class="plan-cta" onclick="document.getElementById('contact-block').scrollIntoView({behavior:'smooth'})">洽詢方案</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-tier">PREMIUM</div>
+        <div class="plan-name">節目合作製播</div>
+        <ul class="plan-features">
+          <li>客製化節目共同製作</li>
+          <li>禪師親自參與錄製</li>
+          <li>全媒體平台聯播</li>
+          <li>專屬節目官網頁面</li>
+          <li>實體活動優先合作</li>
+          <li>長期策略夥伴關係</li>
+        </ul>
+        <button class="plan-cta" onclick="document.getElementById('contact-block').scrollIntoView({behavior:'smooth'})">洽詢方案</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--dark2);padding:1px 0;">
+    <div class="section">
+      <div class="section-title">
+        <span class="en">Merit Board</span>
+        <h2>功德榜</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="merit-grid">
+        <div class="merit-card">
+          <div class="merit-icon">🌏</div>
+          <div class="merit-name">世界和平推手功德榜</div>
+          <p class="merit-desc">登名世界和平推手功德榜，為世界和平貢獻心力，廣結善緣，功德無量。</p>
+          <div style="margin-top:1.5rem;">
+            <a href="http://wxtv.com.tw/public/" target="_blank" class="btn-gold" style="font-size:.78rem;padding:.6rem 1.5rem;">了解詳情</a>
+          </div>
+        </div>
+        <div class="merit-card">
+          <div class="merit-icon">🙏</div>
+          <div class="merit-name">消災化劫功德榜</div>
+          <p class="merit-desc">登名消災化劫功德榜，透過法會儀式消除業障、化解劫難，護佑家宅平安。</p>
+          <div style="margin-top:1.5rem;">
+            <a href="http://wxtv.com.tw/public/" target="_blank" class="btn-gold" style="font-size:.78rem;padding:.6rem 1.5rem;">了解詳情</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="contact-block">
+    <div class="section-title">
+      <span class="en">Contact Us</span>
+      <h2>聯絡洽詢</h2>
+      <div class="gold-line"></div>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:.9rem;letter-spacing:.08em;margin-bottom:3rem;line-height:2;">歡迎來電或來信洽詢，由專人為您說明各項護持合作方案。</p>
     <div class="contact-grid">
       <div class="contact-item">
-        <div class="label">EMAIL</div>
-        <div class="value">contact@weixin.tv</div>
+        <div class="contact-label">地址</div>
+        <div class="contact-value">40854 台中市南屯區文心南路106號5樓</div>
       </div>
       <div class="contact-item">
-        <div class="label">業務洽詢</div>
-        <div class="value">週一至週五 09:00–18:00</div>
+        <div class="contact-label">電話</div>
+        <div class="contact-value">(04) 2475-7769</div>
       </div>
       <div class="contact-item">
-        <div class="label">節目合作</div>
-        <div class="value">program@weixin.tv</div>
+        <div class="contact-label">傳真</div>
+        <div class="contact-value">(04) 2473-3027</div>
       </div>
       <div class="contact-item">
-        <div class="label">廣告製作</div>
-        <div class="value">ad@weixin.tv</div>
+        <div class="contact-label">服務時間</div>
+        <div class="contact-value">週一至週五　09:00 – 18:00</div>
       </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;">
+      <a href="http://wxtv.com.tw/public/" target="_blank" class="btn-solid">贊助廣告線上報名</a>
     </div>
   </div>
 
 </div>
 
+<!-- ════════════════ FOOTER ════════════════ -->
 <footer>
-  <p>© 2009–2026 唯心電視台　版權所有</p>
-  <p style="margin-top: 0.5rem; font-size: 0.75rem;">
-    <a href="#" onclick="showPage('home')" style="color: var(--text-muted); text-decoration: none; margin: 0 1rem;">頻道介紹</a>
-    <a href="#" onclick="showPage('support')" style="color: var(--text-muted); text-decoration: none; margin: 0 1rem;">護持廣告</a>
-  </p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">唯心電視台</div>
+      <p>台灣第一個以易經風水為核心的專業電視頻道，由宗主混元禪師創立於2009年，全頻道自製，24小時播出。</p>
+      <p style="margin-top:1rem;">40854 台中市南屯區文心南路106號5樓<br>Tel: (04) 2475-7769</p>
+    </div>
+    <div class="footer-col">
+      <h4>頻道</h4>
+      <ul>
+        <li><a href="#" onclick="nav('about')">關於我們</a></li>
+        <li><a href="#" onclick="nav('programs')">精選節目</a></li>
+        <li><a href="#" onclick="nav('news')">消息資訊</a></li>
+        <li><a href="#" onclick="nav('watch')">收看方式</a></li>
+        <li><a href="#" onclick="nav('support')">護持廣告</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>相關連結</h4>
+      <ul>
+        <li><a href="http://wxtv.com.tw/public/" target="_blank">唯心網路電視</a></li>
+        <li><a href="http://wxtv.com.tw/public/" target="_blank">禪機山仙佛寺</a></li>
+        <li><a href="http://wxtv.com.tw/public/" target="_blank">唯心聖教易經大學</a></li>
+        <li><a href="http://wxtv.com.tw/public/" target="_blank">禪機山購物</a></li>
+        <li><a href="http://wxtv.com.tw/public/" target="_blank">電視弘法會員</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2009–2026 唯心電視台　版權所有　All Rights Reserved</p>
+    <div class="footer-social">
+      <a href="https://www.facebook.com" target="_blank">Facebook</a>
+      <a href="https://www.youtube.com" target="_blank">YouTube</a>
+      <a href="https://weibo.com" target="_blank">微博</a>
+      <a href="https://www.youku.com" target="_blank">優酷</a>
+    </div>
+  </div>
 </footer>
 
-<script>
-  function showPage(name) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + name).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-  function scrollToContact() {
-    showPage('support');
-    setTimeout(() => {
-      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  }
-  function scrollTo(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  }
-  function toggleMenu() {
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('mobileMenu');
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
-  }
-  function closeMenu() {
-    document.getElementById('menuBtn').classList.remove('open');
-    document.getElementById('mobileMenu').classList.remove('open');
-  }
-</script>
+<button class="scrolltop" id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<script>
+// 頁面切換
+const pages = ['home','about','programs','news','watch','support'];
+function nav(name) {
+  pages.forEach(p => {
+    document.getElementById('page-'+p).classList.toggle('active', p===name);
+    const nl = document.getElementById('nl-'+p);
+    if(nl) nl.classList.toggle('active', p===name);
+    const ml = document.getElementById('ml-'+p);
+    if(ml) ml.classList.toggle('active', p===name);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showPage(name){ nav(name); }
+
+// 漢堡選單
+function toggleMenu(){
+  document.getElementById('menuBtn').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('menuBtn').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// 節目分類
+function switchCat(idx){
+  document.querySelectorAll('.cat-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.querySelectorAll('.cat-content').forEach((c,i)=>c.classList.toggle('active',i===idx));
+}
+
+// 消息分頁
+function switchNews(idx){
+  document.querySelectorAll('.news-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  ['news-0','news-1','news-2','news-3'].forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(el) el.style.display = i===idx?'block':'none';
+  });
+}
+
+// 回頂部按鈕
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrolltop').classList.toggle('visible', window.scrollY>400);
+});
+</script>
 </body>
 </html>
